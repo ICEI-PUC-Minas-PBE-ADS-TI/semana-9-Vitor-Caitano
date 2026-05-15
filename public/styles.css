@@ -1,0 +1,19 @@
+* {
+    max-width: 100%;
+}
+
+#telaPrincipal {
+    display: grid;
+    grid-template-columns: 7fr 3fr
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.card {
+    text-align: center;
+    border: black solid 1px;
+}

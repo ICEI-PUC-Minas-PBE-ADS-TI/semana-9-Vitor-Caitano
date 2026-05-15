@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js"></script>
+    <title>Mini Ecommerce</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    
+<body onload="renderProduct(), renderCategories()">
+    <h2>Loja Virtual</h2>
+    <div>
+        <input id="search" type="text">
+        <select id="filtro">
+            <option value="todas">Todas</option>
+        </select>
+        <button id="btnRender">Renderizar</button>
+    </div>
+    <br>
+    <div id="telaPrincipal">
+        <div id="product-list">
+        </div>
+        <div id="product-details">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
