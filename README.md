@@ -10,8 +10,8 @@ Nesta atividade, será desenvolvido um programa para praticar o uso de funções
 ## Prints do trabalho
 
 <<  COLOQUE A IMAGEM - TELA DE CARDS DE PRODUTOS - AQUI >>
-![print produtos tela](<public/Captura de Tela pt1 produtos.png>)
-![print2 produtos tela](<public/Captura de Tela pt2 produtos.png>)
+![print produtos na tela](<public/Captura de Tela pt1 produtos.png>)
+![print 2 produtos na tela](<public/Captura de Tela pt2 produtos.png>)
 
 <<  COLOQUE A IMAGEM - TELA DE DETALHE DO PRODUTO - AQUI >>
 ![print ver detalhes](<public/Captura de Tela ver detalhes.png>)
