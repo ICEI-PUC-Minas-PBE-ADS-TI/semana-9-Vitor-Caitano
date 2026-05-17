@@ -4,13 +4,17 @@ Nesta atividade, será desenvolvido um programa para praticar o uso de funções
 
 ## Informações Gerais
 
-- Nome:
-- Matrícula:
+- Nome: Vítor Caitano de Morais
+- Matrícula: 926182
 
 ## Prints do trabalho
 
 <<  COLOQUE A IMAGEM - TELA DE CARDS DE PRODUTOS - AQUI >>
+![print produtos tela](<public/Captura de Tela pt1 produtos.png>)
+![print2 produtos tela](<public/Captura de Tela pt2 produtos.png>)
 
 <<  COLOQUE A IMAGEM - TELA DE DETALHE DO PRODUTO - AQUI >>
+![print ver detalhes](<public/Captura de Tela ver detalhes.png>)
 
 <<  COLOQUE A IMAGEM - TELA DO CONSOLE - AQUI >>
+![print console](<public/Captura de Tela saída no Console.png>)

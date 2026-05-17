@@ -2,7 +2,7 @@ const data = {
     "produtos": [
       {
         "id": 1,
-        "nome": "Guitarra T-640 Super SG Tagima",
+        "nome": "Guitarra Stratocaster T-640 Super SG Tagima",
         "preco": 2809.45,
         "categoria": "Guitarras",
         "imagem": "https://pub-c83d3a132dbd48baaf0c726c6fe46c2b.r2.dev/images/2025/02/guitarra-strat-2s-1h-escala-escura-escudo-awh-t-640-super-sg-tagima-produto-1738692660.png",
@@ -85,9 +85,15 @@ const data = {
   }
 
 
-  //B3 - Funções Obrigatórias
+  //B2 - Seleção de elementos (DOM)
 
   const catalogo = document.getElementById("product-list");
+  const detalhes = document.getElementById("product-details");
+  const select = document.querySelector('#category');
+  const pesquisa = document.querySelector('#search');
+  const allCards = document.querySelectorAll('.card');
+
+  //B3 - Funções Obrigatórias
 
   //1.FormatPrice(preco)
   FormatPrice = (preco) => {
@@ -96,16 +102,27 @@ const data = {
 
   //2.createProductCard(produto)
   const meusCards = [];
-  function createProductCard(produto) {
+  function createProductCard(produto)
+  {
     const card = document.createElement('div');
     card.innerHTML = `
       <img src="${produto.imagem}" alt="foto ${produto.nome}">
       <h4>${produto.nome}</h4>
       <p>${produto.categoria}</p>
-      <p>${FormatPrice(produto.preco)}</p>`;
+      <p>${FormatPrice(produto.preco)}</p>
+      <button class="btn-detalhes">Ver Detalhes</button> <br><br>
+      <button class="btn-destaque">Destacar</button>`;
 
     card.classList.add('card');
-    card.setAttribute('data-id',`${produto.id}`);
+    card.setAttribute('data-id', produto.id);
+    card.style.padding = '30px';
+    card.querySelector('.btn-detalhes').addEventListener('click', () => {
+      showProductDetails(produto, card);
+    })
+
+    card.querySelector('.btn-destaque').addEventListener('click', () => {
+      destaqueCard(card);
+    })
 
     return card;
   }
@@ -117,16 +134,115 @@ const data = {
       const cardProduto = createProductCard(item);
       catalogo.appendChild(cardProduto);
     })
+    const select = document.querySelector('#category');
+    select.value = 'todas';
+    const pesquisa = document.querySelector('#search');
+    pesquisa.value = '';
+    querySelectorAllObrigatorio();
   }
+
+  const render = document.getElementById('btnRender');
+  render.addEventListener('click', () => {
+    renderProduct();
+  });
 
   //4.renderCategories()
   renderCategories = () => {
     var categoria = [];
-    const select = document.getElementById('filtro');
-    for (i = 0; i < categoria.length; i++)
+    const select = document.querySelector('#category');
+    select.innerHTML = `<option value="todas">Todas</option>`
+    for (i = 0; i < data.produtos.length; i++)
       if(!categoria.includes(data.produtos[i].categoria))
       {
         select.innerHTML += `<option value="${data.produtos[i].categoria}">${data.produtos[i].categoria}</option>`;
         categoria[i] = data.produtos[i].categoria;
       }
   } 
+
+  //5.showProductDetails(produto)
+  showProductDetails = (produto, card) => {
+    const seAberto = card.getAttribute('data-selected') === 'true'
+    detalhes.innerHTML = '';
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(card => {
+      card.removeAttribute('data-selected', true)
+    });
+    card.setAttribute('data-selected', true);
+
+    if (seAberto)
+      card.removeAttribute('data-selected', true);
+    
+    else if(produto.emEstoque === true)
+      {
+        detalhes.innerHTML = `
+          <h3>${produto.nome}</h3>
+          <h5>${FormatPrice(produto.preco)}</h5>
+          <p>${produto.categoria}</p>
+          <p>Disponível</p>
+          <p>${produto.descricao}</p>`
+      }
+    else
+    {
+        detalhes.innerHTML = `
+          <h3>${produto.nome}</h3>
+          <h5>${FormatPrice(produto.preco)}</h5>
+          <p>${produto.categoria}</p>
+          <p>Indisponível no momento</p>
+          <p>${produto.descricao}</p>`
+    }
+  }
+
+  //6.filterProducts()
+  filterProducts = () => {
+    const pesquisa = document.querySelector('#search').value;
+    const select = document.querySelector('#category');
+    var filtro = [];
+    j = 0;
+    for (i = 0; i < data.produtos.length; i++)
+    {
+      if(data.produtos[i].nome.toLocaleLowerCase().includes(pesquisa.toLocaleLowerCase()))
+      {
+        filtro[j] = data.produtos[i];
+        j++;
+      }
+    }
+
+    if (select.value != 'todas')
+      cat = filtro.filter(item => {
+        return item.categoria == select.value;
+    })
+    else
+      cat = filtro;
+    
+    catalogo.innerHTML = '';
+    cat.forEach (item => {
+        cardProduto = createProductCard(item);
+        catalogo.appendChild(cardProduto);
+    })
+  }
+
+  pesquisa.addEventListener('input', () => {
+    filterProducts();
+  })
+  select .addEventListener('change', () => {
+    filterProducts();    
+  })
+
+  //B4 - Cards com botões e eventos
+
+  //Botão Destaque
+  destaqueCard = (card) => {
+      card.classList.toggle('destaque');
+  }
+
+  //A maior parte dos EventListeners estão junto com os botões ou com suas devidas funções
+
+  querySelectorAllObrigatorio = () => {
+    const TodosCards = document.querySelectorAll('.card')
+    TodosCards.forEach (card => {
+      console.log(`data-id: ${card.getAttribute('data-id')}`)
+    })
+  }
+  
+
+

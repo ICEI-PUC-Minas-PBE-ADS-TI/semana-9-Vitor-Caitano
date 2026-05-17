@@ -4,16 +4,29 @@
 
 #telaPrincipal {
     display: grid;
-    grid-template-columns: 7fr 3fr
+    grid-template-columns: 6fr 4fr
 }
 
 #product-list {
     display: grid;
-    grid-template-columns: 200px 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 15px;
+}
+
+#product-details {
+    padding: 20px;
+    padding-top: 0;
 }
 
 .card {
     text-align: center;
     border: black solid 1px;
+}
+
+.card[data-selected="true"] h4 {
+    color: darkred;
+}
+
+.destaque {
+    border: darkred solid 3px;
 }
